@@ -1,0 +1,1 @@
+https://adventofcode.com/ Sitesindeki problemlerin Java 21 ile çözümüdür.

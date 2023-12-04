@@ -1,4 +1,4 @@
-package guru.hakandurmaz.day1;
+package guru.hakandurmaz.day2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Trebuchet {
 
-    private static final String FILE_PATH = "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day1\\calibration.txt";
+    private static final String FILE_PATH = "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day2\\calibration.txt";
 
     public static void main(String[] args) {
         int sum = calculateSumFromFile();
