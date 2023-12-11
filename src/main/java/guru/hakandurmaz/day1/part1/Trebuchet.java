@@ -1,4 +1,4 @@
-package guru.hakandurmaz.day1;
+package guru.hakandurmaz.day1.part1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class Trebuchet {
 
-    private static final String FILE_PATH = "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day1\\calibration.txt";
+    private static final String FILE_PATH = "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day1\\part1"
+        + "\\calibration.txt";
 
     public static void main(String[] args) {
         int sum = calculateSumFromFile();
@@ -34,7 +35,6 @@ public class Trebuchet {
         int lastNumericValue = -1;
         for (int i = 0; i < text.length(); i++) {
             char currentChar = text.charAt(i);
-
             if (Character.isDigit(currentChar)) {
                 firstNumericValue = Character.getNumericValue(currentChar);
                 break;
@@ -42,7 +42,6 @@ public class Trebuchet {
         }
         for (int i = text.length() - 1; i >= 0; i--) {
             char currentChar = text.charAt(i);
-
             if (Character.isDigit(currentChar)) {
                 lastNumericValue = Character.getNumericValue(currentChar);
                 break;
