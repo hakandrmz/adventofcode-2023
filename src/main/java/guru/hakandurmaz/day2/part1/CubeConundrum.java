@@ -9,58 +9,63 @@ import java.util.regex.Pattern;
 
 public class CubeConundrum {
 
-    public static final String FILE_PATH = "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day2\\part1\\input.txt";
-    static HashMap<String, Integer> hashMap = new HashMap<>();
+  public static final String FILE_PATH =
+      "D:\\projects\\adventofcode-2023\\src\\main\\java\\guru\\hakandurmaz\\day2\\part1\\input.txt";
+  static HashMap<String, Integer> hashMap = new HashMap<>();
 
-    public static void main(String[] args) {
-        int result = calculateSumOfGameIds();
-        System.out.println("Result: " + result);
-    }
+  public static void main(String[] args) {
+    int result = calculateSumOfGameIds();
+    System.out.println("Result: " + result);
+  }
 
-    private static int calculateSumOfGameIds() {
-        int count = 0;
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            var pattern = Pattern.compile("\\b\\d+\\s+\\w+\\b");
+  private static int calculateSumOfGameIds() {
+    int count = 0;
+    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+      String line;
+      var pattern = Pattern.compile("\\b\\d+\\s+\\w+\\b");
 
-            while ((line = reader.readLine()) != null) {
-                var matcher = pattern.matcher(line);
-                while (matcher.find()) {
-                    var grouped = matcher.group();
-                    var color = grouped.split(" ")[1];
-                    var number = grouped.split(" ")[0];
-                    if (!hashMap.containsKey(color)) {
-                        hashMap.put(color, Integer.parseInt(number));
-                    } else {
-                        hashMap.put(color, hashMap.get(color) > Integer.parseInt(number) ? hashMap.get(color) : Integer.parseInt(number));
-                    }
-                }
-                boolean checked = checkIfGameIsPossible(hashMap);
-                hashMap.clear();
-                if (checked) {
-                    int i = extractGameNumber(line);
-                    count += i;
-                }
-            }
-            return count;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+      while ((line = reader.readLine()) != null) {
+        var matcher = pattern.matcher(line);
+        while (matcher.find()) {
+          var grouped = matcher.group();
+          var color = grouped.split(" ")[1];
+          var number = grouped.split(" ")[0];
+          if (!hashMap.containsKey(color)) {
+            hashMap.put(color, Integer.parseInt(number));
+          } else {
+            hashMap.put(
+                color,
+                hashMap.get(color) > Integer.parseInt(number)
+                    ? hashMap.get(color)
+                    : Integer.parseInt(number));
+          }
         }
-    }
-
-    private static boolean checkIfGameIsPossible(Map<String, Integer> hashMap) {
-        var red = hashMap.get("red");
-        var green = hashMap.get("green");
-        var blue = hashMap.get("blue");
-        return red <= 12 && green <= 13 && blue <= 14;
-    }
-
-    private static int extractGameNumber(String input) {
-        var pattern = Pattern.compile("Game (\\d+):");
-        var matcher = pattern.matcher(input);
-        if (matcher.find()) {
-            return Integer.parseInt(matcher.group(1));
+        boolean checked = checkIfGameIsPossible(hashMap);
+        hashMap.clear();
+        if (checked) {
+          int i = extractGameNumber(line);
+          count += i;
         }
-        return -1;
+      }
+      return count;
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+  }
+
+  private static boolean checkIfGameIsPossible(Map<String, Integer> hashMap) {
+    var red = hashMap.get("red");
+    var green = hashMap.get("green");
+    var blue = hashMap.get("blue");
+    return red <= 12 && green <= 13 && blue <= 14;
+  }
+
+  private static int extractGameNumber(String input) {
+    var pattern = Pattern.compile("Game (\\d+):");
+    var matcher = pattern.matcher(input);
+    if (matcher.find()) {
+      return Integer.parseInt(matcher.group(1));
+    }
+    return -1;
+  }
 }
