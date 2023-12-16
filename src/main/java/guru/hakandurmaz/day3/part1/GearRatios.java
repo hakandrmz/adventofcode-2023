@@ -51,12 +51,12 @@ public class GearRatios {
 
   private static void checkNumberIsValid(
       int index, int digitsCount, int currentLine, int foundNumber) {
-    String topRow = readCharacterFromFile(currentLine - 1, index - 1, index + digitsCount + 1);
+    String topRow = readCharacterFromMap(currentLine - 1, index - 1, index + digitsCount + 1);
     String rightChar =
-        readCharacterFromFile(currentLine, index + digitsCount, index + digitsCount + 1);
-    String leftChar = readCharacterFromFile(currentLine, index - 1, index);
-    String underLine = readCharacterFromFile(currentLine + 1, index - 1, index + digitsCount + 1);
-    boolean valid = isValid(topRow + rightChar + leftChar + underLine);
+        readCharacterFromMap(currentLine, index + digitsCount, index + digitsCount + 1);
+    String leftChar = readCharacterFromMap(currentLine, index - 1, index);
+    String underLine = readCharacterFromMap(currentLine + 1, index - 1, index + digitsCount + 1);
+    boolean valid = !(topRow + rightChar + leftChar + underLine).matches("[0-9.]+");
     if (valid) {
       result.addAndGet(foundNumber);
     }
@@ -74,8 +74,7 @@ public class GearRatios {
     return count;
   }
 
-  public static String readCharacterFromFile(
-      int targetRow, int targetColumn, int targetLastColumn) {
+  public static String readCharacterFromMap(int targetRow, int targetColumn, int targetLastColumn) {
     if (targetRow <= 0) {
       return "";
     }
@@ -91,10 +90,6 @@ public class GearRatios {
     }
 
     return line.substring(targetColumn, targetLastColumn);
-  }
-
-  public static boolean isValid(String check) {
-    return !check.matches("[0-9.]+");
   }
 
   public static String repeatCharacter(int count, char character) {
